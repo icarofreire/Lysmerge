@@ -43,7 +43,8 @@
                         :if-does-not-exist :create)
   
     ;; Write random numbers to the file
-    (format stream conteudo #\linefeed)
+    ;(format stream conteudo #\Linefeed)
+    (write-line conteudo stream)
 )
 )
 
@@ -52,7 +53,29 @@
 	(con_lis pasta2)
 )
 
-(ini pasta1 pasta2)
-(print  lis)
+;(ini pasta1 pasta2)
+;(print  lis)
 ;*******************************************************************
+
+(defun is_list(x)(listp x))
+
+; \/ escrever os elementos de uma lista separadamente por linha no arquivo;
+(defun esc_lista(lista)
+	(if (equal (is_list lista) T)
+		(loop for elemento in lista do
+			(escrever_arq (if (atom elemento) (write-to-string elemento)))
+		)
+	)
+)
+
+;(escrever_arq "1 2 3 4 5")
+;(print (is_list (list "fr" "teste")))
+;(print "icaro")
+(esc_lista '(1 2 3 4 5 6 7))
+;(print (list 1 2 3 4 5 6 7))
+
+;(print (write-to-string 8))
+;(print (parse-integer (write-to-string 8)))
+
+
 
